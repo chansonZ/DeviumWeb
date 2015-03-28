@@ -65,9 +65,9 @@ shinybootstrap2::withBootstrap2({shinyServer(function(input, output, session) {
 			tabPanel("Transform", htmlOutput("transform_data"), verbatimTextOutput("transform_summary")),
 			#should test for internet if not show local else show iframe (when website built)
 # 			tabPanel("About", includeRmd("about.Rmd")),
-      tabPanel("About", includeMarkdown("about.md")),
+      tabPanel("About", includeMarkdown("about.md"))#,
 			# conditionalPanel(condition = "values.debug_on == 'TRUE'",
-			tabPanel("Debug", verbatimTextOutput("debug")) # turn on return of input and values
+# 			tabPanel("Debug", verbatimTextOutput("debug")) # turn on return of input and values
 			# )
 		)
 	})
