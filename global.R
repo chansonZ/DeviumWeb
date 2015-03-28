@@ -63,6 +63,11 @@ values[["diamonds_descr"]] <- get(robj[2])
 
 values$datasetlist <- c("mtcars", "diamonds")
 
+#user password authentication
+values$user_pass_table<-as.matrix(data.frame(user="trial",password="trial123"))
+values$password<-"wrong password"
+
+#should replace all below using shinyBS
 
 # custom fxns/options from radyant
 panderOptions('digits',3)

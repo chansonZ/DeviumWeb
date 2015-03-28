@@ -747,6 +747,7 @@ initialize_plotly<-function(plotly.instance="py",...){
 	
 	load.cred<-function(file="plotly_credentials"){load(file);return(plotly.credentials)}
 	plotly_credentials<-tryCatch(load.cred(), error=function(e) {NULL})
+  if(any(sapply(plotly_credentials,function(x) x==""))){plotly_credentials<-NULL}
 	if(is.null(plotly_credentials)) {
 		plotly_credentials<-signup.plotly(...)
 		save(plotly_credentials, file="plotly_credentials")

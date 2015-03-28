@@ -28,9 +28,9 @@ shinybootstrap2::withBootstrap2({shinyUI(
 		  wellPanel(
 			uiOutput("datasets")
 		  ),
-
 		  # find the appropriate UI
-		  uiOutput("ui_finder")
+		  uiOutput("ui_finder"),
+		  uiOutput("user_login_UI")
 		),
 
     mainPanel(	

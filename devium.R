@@ -249,6 +249,29 @@ output$nrRows <- renderUI({
 	sliderInput("nrRows", "Rows to show (max 50):", min = 1, max = nr, value = min(15,nr), step = 1)
 })
 
+output$user_login_UI<-renderUI({
+	 wellPanel(
+		tags$details(tags$summary(tags$div(icon("fa fa-key"),tags$label(style="font-size: 20px;","Sign in"),style="font-size: 20px; color: #EF3732;")),
+			textInput("user_id","User Name",value=""),
+			passwordInput("user_password","Password",value="")
+		)
+	)	
+})	
+
+#observer for authentication
+# authenticate_login<-reactive({
+observe({
+	if(is.null(input$user_password)) return()
+	# if(identical(as.character(input$user_password),"")) return(values$password<-"")
+	lookup<-values$user_pass_table
+	rownames(lookup)<-lookup[,"user"]
+	if(as.character(input$user_id)%in%as.character(lookup[,"user"])) {
+		values$password<-as.character(lookup[as.character(input$user_id),"password"])
+	} else {
+		values$password<-"eruicqwdfqwefweqferefh" 
+	}
+})
+
 ################################################################
 # Data reactives - view, plot, transform data, and log your work
 ################################################################
