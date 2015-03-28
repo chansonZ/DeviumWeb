@@ -6,12 +6,15 @@ libs <- c("shiny", "knitr", "Hmisc", "car", "tools", "gridExtra", "markdown", "R
 #Devium Libs
 libs2 <- c("impute","WGCNA","RJSONIO","pwr","shiny", "car", "AER", "Ecdat", "foreign", "tools", "ggplot2", 
 	"gridExtra", "reshape2", "plyr", "markdown", "R.utils", "psych", "rela", "xts","fdrtool","pls",
-	"qvalue","pcaMethods","shiny","hexbin","RColorBrewer","shinyBS","httr","jsonlite") #"arm", 
+	"qvalue","pcaMethods","shiny","hexbin","RColorBrewer","shinyBS","httr","jsonlite","pheatmap") #"arm", 
 
 libs<-unique(c(libs,libs2))	
+
+#other packages used need to be installed will be required elsewhere  #there are more for pathways
+#		libs<-c("nortest","plyr","nortest","car","gridExtra","ellipse","splancs","grDevices","snow","doSNOW","foreach","ROCR")
 		
 # #function to load from bioconductor
-# #function to check for packages and attempt to download if not found
+# # #function to check for packages and attempt to download if not found
 # check.get.packages<-function(pkg)
 	# {
 		# options(warn=-1)

@@ -723,12 +723,16 @@ list(
 #current plotly function is broken; 
 #not to mention API does not return JSON as promised
 signup.plotly<-function (username = NULL, email = NULL, save =TRUE,...) {
-    if (is.null(username)) {
-        user<-strsplit(tempfile(),"\\\\")[[1]]
+    #check OS version to parse user name
+	OS<-as.character(Sys.info()['sysname'])
+	if (is.null(username)) {
+		char<-if(identical(OS,"Windows")) "\\\\" else "/"
+        user<-strsplit(tempfile(),char)[[1]]
 		username<-user[[length(user)]]
 		email=paste0(user,"@mailinator.com")
 	}	
 	platform = "R"
+	
 	version = as.character(packageVersion("plotly"))
 	url <- "https://plot.ly/apimkacct"
     res <- POST(url, body=list(platform = platform, version = version, email = email, un = username))
