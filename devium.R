@@ -250,27 +250,39 @@ output$nrRows <- renderUI({
 })
 
 output$user_login_UI<-renderUI({
-	 wellPanel(
-		tags$details(tags$summary(tags$div(icon("fa fa-key"),tags$label(style="font-size: 20px;","Sign in"),style="font-size: 20px; color: #EF3732;")),
-			textInput("user_id","User Name",value=""),
-			passwordInput("user_password","Password",value="")
-		)
-	)	
+  conditionalPanel(
+    condition = "!input.user_is_auth",      
+    wellPanel(
+      tags$details(open="open",tags$summary(tags$div(icon("fa fa-key"),
+                               tags$label(style="font-size: 20px;","Sign in"),style="font-size: 20px; color: #EF3732;")),
+                   textInput("user_id","User Name",value=""),
+                   passwordInput("user_password","Password",value=""),
+                   conditionalPanel(
+                     condition = "input.user_password =='478r0ry74554ftvocfbwv'", # hack             
+                     checkboxInput(inputId = "user_is_auth",label='logged in',value=FALSE)
+                   )   
+      )
+    )
+  )
 })	
 
-#observer for authentication
-# authenticate_login<-reactive({
+#authenticate user ID password pair
 observe({
+	#table of user name and passwords
 	if(is.null(input$user_password)) return()
-	# if(identical(as.character(input$user_password),"")) return(values$password<-"")
+	if(identical(as.character(input$user_password),"")) values$password<-""
 	lookup<-values$user_pass_table
 	rownames(lookup)<-lookup[,"user"]
-	if(as.character(input$user_id)%in%as.character(lookup[,"user"])) {
+	if(as.character(input$user_id)%in%as.character(lookup[,"user"])) { # checking user and then checking input pass vs. db pass
 		values$password<-as.character(lookup[as.character(input$user_id),"password"])
+    if(identical(as.character(input$user_password),values$password)){
+	  	updateCheckboxInput(session, "user_is_auth",value = TRUE)
+    }
 	} else {
-		values$password<-"eruicqwdfqwefweqferefh" 
-	}
+		values$password<-"eruicqwdfqwefweqferefh"
+	}	 
 })
+
 
 ################################################################
 # Data reactives - view, plot, transform data, and log your work

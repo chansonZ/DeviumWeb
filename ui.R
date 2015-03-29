@@ -24,13 +24,12 @@ shinybootstrap2::withBootstrap2({shinyUI(
 		  # includeHTML("www/js/sel2.js"),
 		  # includeHTML('www/js/lr.js'), 
 		  getTool("tool"),
-
+		  uiOutput("user_login_UI"),	
 		  wellPanel(
 			uiOutput("datasets")
 		  ),
 		  # find the appropriate UI
-		  uiOutput("ui_finder"),
-		  uiOutput("user_login_UI")
+		  uiOutput("ui_finder")
 		),
 
     mainPanel(	
